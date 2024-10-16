@@ -62,6 +62,31 @@ export async function GET() {
                     },
                 },
             },
+            "/api/tools/get-user": {
+                get: {
+                    summary: "get user information",
+                    description: "Respond with user account ID",
+                    operationId: "get-user",
+                    responses: {
+                        "200": {
+                            description: "Successful response",
+                            content: {
+                                "application/json": {
+                                    schema: {
+                                        type: "object",
+                                        properties: {
+                                            accountId: {
+                                                type: "string",
+                                                description: "The user's account ID",
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
         },
     };
 
