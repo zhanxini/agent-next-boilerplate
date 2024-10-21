@@ -7,7 +7,5 @@ export async function GET() {
   const mbMetadata = JSON.parse(headersList.get('mb-metadata') || '{}');
   const accountId = mbMetadata?.accountData?.accountId || 'near';
 
-
-
   return NextResponse.json({ accountId: accountId });
 }
