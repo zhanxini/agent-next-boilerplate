@@ -1,40 +1,90 @@
-# Bitte AI Agent NextJS Boilerplate
+# Bitte AI Agent NextJS Template
 
-Check the [docs](https://docs.bitte.ai/agents/quick-start) 
+This template provides a starting point for creating AI agents using the Bitte Protocol with Next.js. It includes pre-configured endpoints and tools that demonstrate common agent functionalities.
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Features
 
-## Getting Started
+- 🤖 Pre-configured AI agent setup
+- 🛠️ Built-in tools and endpoints:
+  - Blockchain information retrieval
+  - NEAR transaction generation
+  - Reddit frontpage fetching
+  - Twitter share intent generation
+  - Coin flip functionality
+- ⚡ Next.js 14 with App Router
+- 🎨 Tailwind CSS for styling
+- 📝 TypeScript support
+- 🔄 Hot reload development environment
 
-First, run the development server:
+## Quick Start
+
+1. Clone this repository
+2. Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Start the development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This will:
+- Start your Next.js application
+- Launch make-agent 
+- Prompt you to sign a message in Bitte wallet to create an API key
+- Launch your agent in the Bitte playground
+- Allow you to freely edit and develop your code in the playground environment
+
+
+## Available Tools
+
+The template includes several pre-built tools:
+
+### 1. Blockchain Information
+- Endpoint: `/api/tools/get-blockchains`
+- Returns a randomized list of blockchain networks
+
+### 2. NEAR Transaction Generator
+- Endpoint: `/api/tools/create-transaction`
+- Creates NEAR transaction payloads for token transfers
+
+### 3. Reddit Frontpage
+- Endpoint: `/api/tools/reddit`
+- Fetches current posts from Reddit's frontpage
+
+### 4. Twitter Share
+- Endpoint: `/api/tools/twitter`
+- Generates Twitter share intent URLs
+
+### 5. Coin Flip
+- Endpoint: `/api/tools/coinflip`
+- Simple random coin flip generator
+
+## AI Plugin Configuration
+
+The template includes a pre-configured AI plugin manifest at `/.well-known/ai-plugin.json`. You can customize the assistant's behavior by modifying the configuration in:
+
+
+## Deployment
+
+1. Push your code to GitHub
+2. Deploy to Vercel or your preferred hosting platform
+3. Add your `BITTE_KEY` to the environment variables
+4. The `make-agent deploy` command will automatically run during build
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Bitte Protocol Documentation](https://docs.bitte.ai)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [OpenAPI Specification](https://swagger.io/specification/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT License
