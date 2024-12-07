@@ -17,3 +17,9 @@ const config: Config = {
   plugins: [],
 };
 export default config;
+// Define the structure of the request body
+export interface PiggyBankRequestBody {
+  amount: number; // Total transaction amount
+  senderWallet: string; // Wallet initiating the transaction
+  savingsWallet: string; // Wallet where savings will be deposited
+}
