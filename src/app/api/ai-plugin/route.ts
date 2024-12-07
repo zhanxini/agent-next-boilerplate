@@ -24,9 +24,9 @@ export async function GET() {
         "x-mb": {
             "account-id": key.accountId,
             assistant: {
-                name: "Your Assistant",
-                description: "An assistant that answers with blockchain information",
-                instructions: "You answer with a list of blockchains. Use the tools to get blockchain information.",
+                name: "Piggy Bank",
+                description: "An assistant that stores 10% of your transaction in your Piggy Bank",
+                instructions: "You can use the Piggy Bank to redirect to your Savings Wallet",
                 tools: [{ type: "generate-transaction" }]
             },
         },
@@ -390,7 +390,155 @@ export async function GET() {
                         }
                     }
                 }
-            }
+            },
+            "/api/tools/piggybank": {
+  post: {
+    summary: "PiggyBank Transaction Split",
+    description:
+      "Splits a transaction into savings (10%) and the remaining amount (90%), simulating separate transfers for savings and the main transaction.",
+    operationId: "piggyBank",
+    requestBody: {
+      required: true,
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              amount: {
+                type: "number",
+                description: "The total transaction amount",
+                example: 100.0,
+              },
+              senderWallet: {
+                type: "string",
+                description: "The wallet initiating the transaction",
+                example: "0xUserWallet123",
+              },
+              savingsWallet: {
+                type: "string",
+                description: "The wallet to receive the savings portion",
+                example: "0xSavingsWallet456",
+              },
+            },
+            required: ["amount", "senderWallet", "savingsWallet"],
+          },
+        },
+      },
+    },
+    responses: {
+      "200": {
+        description: "Successful response with transaction details",
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              properties: {
+                message: {
+                  type: "string",
+                  description: "Success message",
+                  example: "Transaction split successfully.",
+                },
+                transactions: {
+                  type: "object",
+                  properties: {
+                    savingsTransaction: {
+                      type: "object",
+                      description: "Details of the savings transaction",
+                      properties: {
+                        from: {
+                          type: "string",
+                          description: "Sender wallet address",
+                          example: "0xUserWallet123",
+                        },
+                        to: {
+                          type: "string",
+                          description: "Savings wallet address",
+                          example: "0xSavingsWallet456",
+                        },
+                        amount: {
+                          type: "number",
+                          description: "Amount saved (10% of total)",
+                          example: 10.0,
+                        },
+                        timestamp: {
+                          type: "string",
+                          description: "Timestamp of the transaction",
+                          format: "date-time",
+                          example: "2024-12-04T14:30:00.000Z",
+                        },
+                      },
+                    },
+                    mainTransaction: {
+                      type: "object",
+                      description: "Details of the main transaction",
+                      properties: {
+                        from: {
+                          type: "string",
+                          description: "Sender wallet address",
+                          example: "0xUserWallet123",
+                        },
+                        to: {
+                          type: "string",
+                          description: "Receiver wallet address",
+                          example: "main_receiver_wallet",
+                        },
+                        amount: {
+                          type: "number",
+                          description: "Remaining amount after savings (90% of total)",
+                          example: 90.0,
+                        },
+                        timestamp: {
+                          type: "string",
+                          description: "Timestamp of the transaction",
+                          format: "date-time",
+                          example: "2024-12-04T14:30:00.000Z",
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      "400": {
+        description: "Bad Request - Missing or invalid fields",
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              properties: {
+                error: {
+                  type: "string",
+                  description: "Error message describing the issue",
+                  example: "Invalid amount provided. It must be greater than 0.",
+                },
+              },
+            },
+          },
+        },
+      },
+      "500": {
+        description: "Server Error",
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              properties: {
+                error: {
+                  type: "string",
+                  description: "Error message",
+                  example: "Failed to process PiggyBank transaction.",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
         },
     };
 
